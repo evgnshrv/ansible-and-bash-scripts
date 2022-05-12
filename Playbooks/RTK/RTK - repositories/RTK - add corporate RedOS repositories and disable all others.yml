@@ -1,0 +1,27 @@
+---
+- name: Add corporate RedOS repositories and disable all others
+  hosts: test # Replace "test" with the desired host group (host groups can be viewed in /etc/ansible/hosts)
+  remote_user: root
+
+  tasks:
+
+  - name: Make a directory for old *.repo files 
+    ansible.builtin.file:
+      path: /etc/yum.repos.d/old-repo-files
+      state: directory
+ 
+  - name: Disable all repositories
+    shell: mv -f /etc/yum.repos.d/*.repo /etc/yum.repos.d/old-repo-files/
+
+  - name: Add corporate RedOS repositories
+    ansible.builtin.copy:
+      src: RTK-RedOS-Corporate-Repositories.repo
+      dest: /etc/yum.repos.d/RTK-RedOS-Corporate-Repositories.repo
+
+  - name: Clean yum cache
+    shell: yum clean all
+
+
+
+
+

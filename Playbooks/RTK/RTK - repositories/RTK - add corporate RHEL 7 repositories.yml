@@ -1,0 +1,19 @@
+---
+- name: Add corporate RHEL 7 repositories
+  hosts: test # Replace "test" with the desired host group (host groups can be viewed in /etc/ansible/hosts)
+  remote_user: root
+
+  tasks:
+
+  - name: Add corporate RHEL 7 repositories
+    ansible.builtin.copy:
+      src: RTK-RHEL-7-Corporate-Repositories.repo
+      dest: /etc/yum.repos.d/RTK-RHEL-7-Corporate-Repositories.repo
+
+  - name: Clean yum cache
+    shell: yum clean all
+
+
+
+
+

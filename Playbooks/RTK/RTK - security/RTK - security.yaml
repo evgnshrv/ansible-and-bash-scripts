@@ -1,0 +1,32 @@
+---
+- name: Security settings
+  hosts: test # Replace "test" with the desired host group (host groups can be viewed in /etc/ansible/hosts)
+  remote_user: root
+  
+  tasks:
+
+  - name: Disable SELinux
+    ansible.posix.selinux:
+      state: disabled
+      ignore_errors: yes
+
+  - name: Disable iptables (RHEL 5/6)
+    shell: service iptables stop; chkconfig iptables off
+    when: (ansible_facts.distribution_major_version == "5") or (ansible_facts.distribution_major_version == "6") 
+
+  - name: Disable firewalld (RHEL 7/8 or RedOS 7)
+    shell: systemctl stop firewalld; systemctl disable firewalld
+    when: (ansible_facts.distribution_major_version == "7") or (ansible_facts.distribution_major_version == "8")
+     
+  - name: Change sshd configuration
+    ansible.builtin.copy:
+      src: sshd_config
+      dest: /etc/ssh/sshd_config
+
+  - name: Restart sshd
+    ansible.builtin.service:
+      name: sshd
+      state: restarted
+      ignore_errors: yes
+
+#- name: Install Kaspersky Endpoint Security and Kaspersky Agent

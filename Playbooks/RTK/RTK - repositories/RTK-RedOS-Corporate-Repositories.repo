@@ -1,0 +1,23 @@
+[base-mirror]
+name=RedOS RTK mirror - Base
+baseurl=http://mirror2.ks.rt.ru/redos/$releasever/$basearch/os/
+enabled=1
+gpgcheck=0
+
+[updates-mirror]
+name=RedOS RTK mirror - Updates
+baseurl=http://mirror2.ks.rt.ru/redos/$releasever/$basearch/updates/
+enabled=1
+gpgcheck=0
+
+[debug-mirror]
+name=RedOS RTK mirror - Debuginfo
+baseurl=http://mirror2.ks.rt.ru/redos/$releasever/$basearch/debug/
+enabled=1
+gpgcheck=0
+
+[base-source-mirror]
+name=RedOS RTK mirror - Base Sources
+baseurl=http://mirror2.ks.rt.ru/redos/$releasever/$basearch/source/
+enabled=1
+gpgcheck=0
