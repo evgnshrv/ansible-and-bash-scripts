@@ -1,2 +1,2 @@
 # Ansible
-Ansible playbooks, settings and documentation for various projects.
+Ansible playbooks, bash scripts, settings and documentation for various projects.
